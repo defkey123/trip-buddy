@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title>Trip Buddy - Login</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="{{ url_for('static', filename='login.js') }}"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    </head>
+    <body class="panel">
+
+        <div id="topnav" class="topnav animated headroom headroom--pinned fadeInDown">
+            <h1 class="inlineblock">Welcome to Trip Buddy!</h1>
+        </div>
+
+        <div class="panel panel-heading">
+            <h1 class="panel panel-heading automargins">Login</h1>
+        </div>
+        <div class="panel panel-body">
+            <form action="/login" method="post">
+                <p class="bg-info">Email: <input class="form-control" type="text" name="email"></p>
+                <p class="bg-info">Password: <input class="form-control" type="password" name="password"></p>
+                <input class="btn btn-primary" type="submit" value="Login">
+            </form>
+        </div>
+
+        <div class="panel panel-heading">
+            <h1 class="panel panel-heading">Register</h1>
+        </div>
+        <form class="panel panel-heading" action="/register" method="post" id="regForm">
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+            {% for m in messages %}
+            <p class="bg-danger">{{m}}</p>
+            {% endfor %}
+            {% endif %}
+            {% endwith %}
+            <p>First Name <input class="form-control" type="text" name="firstname"></p>
+            <p>Last Name <input class="form-control" type="text" name="lastname"></p>
+            <div id="emailMsg"></div>
+            <p>Email <input class="form-control" type="email" name="email" id="email"></p>
+            <p>Password <input class="form-control" type="password" name="password"></p>
+            <p>Confirm Password <input class="form-control" type="password" name="password_confirm"></p>
+            <button class="btn btn-primary" type="submit">Submit</button>
+        </form>
+
+    </body>
+</html>

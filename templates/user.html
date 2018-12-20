@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title>Trip Buddy - {{user["first_name"]}}'s Trips</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="{{ url_for('static', filename='login.js') }}"></script>
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    </head>
+    <body>
+
+        <div id="topnav" class="topnav animated headroom headroom--pinned fadeInDown">
+            <h1 class="inlineblock paddingleft">Hello {{session['firstname']}}!</h1>
+            <form class="inlineblock paddingleft" action="/log_out">
+                <input class="btn btn-primary" type="submit" value="Log out">
+            </form>
+            <form class="inlineblock" action="/my_account/{{session['uid']}}">
+                <input class="btn btn-primary" type="submit" value="Edit My Account">
+            </form>
+        </div>
+
+        <div class="panel panel-heading">
+            <h3>{{user[0]['first_name']}} {{user[0]["last_name"]}}'s Trips:</h3>
+            {% for q in quotes %}
+                    <div class="panel panel-body"
+                        <p>{{q["author"]}} : {{q["content"]}}</p>
+                        <p>Posted By: {{q["first_name"]}} {{q["last_name"]}}</p>
+                        <p>{{q["likes_num"]}} people like this.</p> <a href="/like_quote/{{q['id']}}" class="btn btn-primary">Like</a>
+                            {% if q["posted_by"] == session['uid'] %}
+                                <a href="/delete_quote/{{q['id']}}">Delete quote</a>
+                            {% endif %}
+                    </div>
+                {% endfor %}
+
+        </div>
+
+    </body>
+</html>

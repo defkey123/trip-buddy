@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title>Trip Buddy - New Trip</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="{{ url_for('static', filename='login.js') }}"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    </head>
+    <body>
+
+        <div class="panel panel-heading">
+            <h2>Add a Trip!</h2>
+            <form id="regForm" class="inlineblock" action='/create_trip' method="post">
+                {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                        {% for m in messages %}
+                            <p class="bg-danger">{{m}}</p>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+                <p>Destination <input class="form-control" type="text" name="destination"></p>
+                <p>Start Date <input class="form-control" type="date" name="startdate"></p>
+                <p>End Date <input class="form-control" type="date" name="enddate"></p>
+                <p>Plan <input class="form-control" type="text" name="plan"></p>
+                <button class="btn btn-primary" type="submit">Submit</button>
+            </form>
+        </div>
+
+    </body>
+</html>

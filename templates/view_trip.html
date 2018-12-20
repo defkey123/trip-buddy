@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title>Trip Buddy - Trip to {{trip[0]['destination']}}</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="{{ url_for('static', filename='login.js') }}"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    </head>
+    <body>
+
+        <div id="topnav" class="topnav animated headroom headroom--pinned fadeInDown">
+            <h1 class="inlineblock paddingleft">Hello {{session['firstname']}}!</h1>
+            <form class="inlineblock paddingleft" action="/log_out">
+                <input class="btn btn-primary" type="submit" value="Log out">
+            </form>
+            <form class="inlineblock" action="/trips">
+                <input class="btn btn-danger" type="submit" value="Back">
+            </form>
+        </div>
+
+        <div class="panel panel-heading">
+            <h3>Trip to {{trip[0]['destination']}}:</h3>
+                <div class="panel panel-body"
+                    <p>Destination: {{trip[0]["destination"]}}</p>
+                    <p>Start Date: {{trip[0]["start_date"]}}</p>
+                    <p>End Date: {{trip[0]["end_date"]}}</p>
+                    <p>Plan: {{trip[0]["plan"]}}</p>
+                    <p>Posted By: <a href="/user/{{trip['posted_by']}}">{{trip[0]["first_name"]}} {{trip[0]["last_name"]}}</a></p>
+                    {% if trip[0]["created_by"] != session['uid'] %}
+                    <a href="/join_trip/{{trip[0]['id']}}">Join Trip</a>
+                    {% else %}
+                    <a href="/delete_trip/{{trip[0]['id']}}">Delete Trip</a>
+                    {% endif %}
+                </div>
+
+                <h4>People going:</h4>
+                {% for p in people %}
+                <p>{{p["first_name"]}} {{p["last_name"]}}</p>
+                {% endfor %}
+
+        </div>
+
+    </body>
+</html>

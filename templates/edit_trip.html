@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title>Trip Buddy - Edit Trip</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="{{ url_for('static', filename='login.js') }}"></script>
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    </head>
+    <body>
+
+        <div id="topnav" class="topnav animated headroom headroom--pinned fadeInDown">
+            <h1 class="inlineblock paddingleft">Edit My Trip</h1>
+            <a class="btn btn-danger inlineblock" href="/quotes">Back</a>
+            <form class="inlineblock" action="/log_out">
+                <input class="btn btn-primary" type="submit" value="Logout">
+            </form>
+        </div>
+
+        <div class="panel panel-heading">
+            <h2>Edit your Trip!</h2>
+            <form id="regForm" class="inlineblock" action='/edit_trip' method="post">
+                {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                        {% for m in messages %}
+                            <p class="bg-danger">{{m}}</p>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+                <p>Destination <input class="form-control" type="text" name="destination" value="{{trip[0]['destination']}}"></p>
+                <p>Start Date <input class="form-control" type="date" name="startdate" value="{{trip[0]['start_date']}}"></p>
+                <p>End Date <input class="form-control" type="date" name="enddate" value="{{trip[0]['end_date']}}"></p>
+                <p>Plan <input class="form-control" type="text" name="plan" value="{{trip[0]['plan']}}"></p>
+                <button class="btn btn-primary" type="submit">Submit</button>
+            </form>
+        </div>
+
+    </body>
+</html>
